@@ -30,12 +30,12 @@ namespace SnakeConsole
             Random rand = new Random();
             while (true)
             {
-                //Clear();
-                Move();
-                //WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
-                //Print(area.H, area.W);
-                Thread.Sleep(1);
-                //Wall.BackText = (ConsoleColor)rand.Next(16);
+                Clear();
+                //Move();
+                WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
+                Print(area.H, area.W);
+                Thread.Sleep(30);
+                Wall.BackText = (ConsoleColor)rand.Next(16);
             }
         }
 
