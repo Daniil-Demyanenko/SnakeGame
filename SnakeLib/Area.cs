@@ -21,19 +21,5 @@ public class Area
 
 
     }
-     
-
-    /// <summary>
-    /// Содержит ли змейка точку
-    /// </summary>
-    /// <param name="point">точка</param>
-    /// <returns></returns>
-    public bool SnakeIsContain(Point point)
-    {
-        foreach (Point p in snake.SnakePos)
-            if (p.x == point.x && p.y == point.y) return true;
-        
-        return false;
-    }
 }
 

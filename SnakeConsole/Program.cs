@@ -11,6 +11,7 @@ namespace SnakeConsole
     {
         static Color Wall = new Color(ConsoleColor.Black, ConsoleColor.DarkBlue);
         static Color Apple = new Color(ConsoleColor.Black, ConsoleColor.Red);
+        static Color Snake = new Color(ConsoleColor.Black, ConsoleColor.Green);
         static Area area = new Area(20, 20);
         static void Main()
         {
@@ -23,13 +24,13 @@ namespace SnakeConsole
             area.snake.SnakePos.Add(new Point(6, 2));
             area.snake.SnakePos.Add(new Point(6, 3));
             #endregion
-            area.Apple = new Point(19, 19);
+            area.Apple = new Point(1, 1);
             while (true)
             {
 
                 Move();
                 Clear();
-                WriteLine(area.SnakeIsContain(new Point(3, 8)));
+                WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
                 Print(area.H, area.W);
                 Thread.Sleep(700);
             }
@@ -53,6 +54,7 @@ namespace SnakeConsole
                     if (s == 0) { Wall.Print("  "); }
                     else if (s == w + 1) { Wall.PrintLine("  "); break; }
                     else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
+                    else if (area.snake.SnakeIsContain(new Point(s-1, i-1))) Snake.Print("  ");
                     else Write("  ");
                 }
             }
