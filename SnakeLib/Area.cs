@@ -27,7 +27,6 @@ public class Area
     {
         foreach (Point p in snake.SnakePos)
         {
-
             return true;
         }
         return false;
