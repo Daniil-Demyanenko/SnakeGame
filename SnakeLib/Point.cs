@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeLib
 {
-    internal class Point
+    public class Point
     {
         public int x, y;
 

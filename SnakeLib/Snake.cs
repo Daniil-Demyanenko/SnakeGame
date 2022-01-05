@@ -8,7 +8,7 @@ namespace SnakeLib
 {
     public class Snake
     {
-        public var SnakePos = new List<Point>();
+        public List<Point> SnakePos = new List<Point>();
         
     }
 }
