@@ -14,5 +14,5 @@ namespace SnakeLib
         {
             this.x = x; this.y = y;
         }
-    }
+    } 
 }

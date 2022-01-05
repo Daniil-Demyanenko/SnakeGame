@@ -3,9 +3,8 @@
 public class Area
 {
     public int W, H;
-    
     public Point Apple;
-    public Snake snake;
+    public Snake snake = new Snake();
     private Random RndPoint = new Random();
     readonly Point AreaCenter;
 
@@ -13,7 +12,7 @@ public class Area
     {
         this.W = W; this.H = H;
         AreaCenter = new Point(W / 2, H / 2);
-    }
+    } 
 
     public void add_apple()
     {
@@ -22,14 +21,6 @@ public class Area
 
 
     }
-
-    bool SnakeIsContain()
-    {
-        foreach (Point p in snake.SnakePos)
-        {
-            return true;
-        }
-        return false;
     }
 }
 
