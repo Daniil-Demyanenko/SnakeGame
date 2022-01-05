@@ -21,6 +21,6 @@ namespace SnakeLib
                 if (p.x == point.x && p.y == point.y) return true;
 
             return false;
-        }
+        } 
     }
 }

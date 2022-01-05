@@ -12,7 +12,7 @@ public class Area
     {
         this.W = W; this.H = H;
         AreaCenter = new Point(W / 2, H / 2);
-    }
+    } 
 
     public void add_apple()
     {

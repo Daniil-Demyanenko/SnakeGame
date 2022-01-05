@@ -56,7 +56,7 @@ namespace SnakeConsole
                     else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
                     else if (area.snake.SnakeIsContain(new Point(s-1, i-1))) Snake.Print("  ");
                     else Write("  ");
-                }
+                } 
             }
 
         }
