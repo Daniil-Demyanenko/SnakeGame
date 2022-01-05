@@ -35,7 +35,7 @@ namespace SnakeConsole
                 WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
                 Print(area.H, area.W);
                 Thread.Sleep(30);
-                Wall.BackText = (ConsoleColor)rand.Next(16);
+                Wall.BackText = (ConsoleColor)rand.Next(1, 16);
             }
         }
 
@@ -57,7 +57,7 @@ namespace SnakeConsole
                 for (int s = 0; s < w + 2; s++)
                 {
                     if (s == 0) { Wall.Print("  "); }
-                    else if (s == w + 1) { Wall.PrintLine("  "); break; }
+                    else if (s == w + 1) { Wall.PrintLine("  "); break; } //Нафиг брейк?
                     else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
                     else if (area.snake.SnakeIsContain(new Point(s - 1, i - 1))) Snake.Print("  ");
                     else Write("  ");
