@@ -3,6 +3,7 @@
 public class Area
 {
     public int W, H;
+    
     public Point Apple;
     public Snake snake;
     private Random RndPoint = new Random();
@@ -26,6 +27,7 @@ public class Area
     {
         foreach (Point p in snake.SnakePos)
         {
+
             return true;
         }
         return false;
