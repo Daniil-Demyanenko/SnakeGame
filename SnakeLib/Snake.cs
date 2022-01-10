@@ -15,7 +15,8 @@ namespace SnakeLib
         /// </summary>
         /// <param name="point">точка</param>
         /// <returns></returns>
-        public bool SnakeIsContain(Point point)
+        
+        public bool IsContainPoint(Point point)
         {
             foreach (Point pos in SnakePos)
                 if (point == pos) return true;
