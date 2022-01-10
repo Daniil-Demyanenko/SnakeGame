@@ -17,13 +17,13 @@ namespace SnakeConsole
         static void Main()
         {
             #region snake
-            area.snake.SnakePos = new List<Point>();
-            area.snake.SnakePos.Add(new Point(2, 2));
-            area.snake.SnakePos.Add(new Point(3, 2));
-            area.snake.SnakePos.Add(new Point(4, 2));
-            area.snake.SnakePos.Add(new Point(5, 2));
-            area.snake.SnakePos.Add(new Point(6, 2));
-            area.snake.SnakePos.Add(new Point(6, 3));
+            area.Snake = new Stack<Point>();
+            area.Snake.Push(new Point(2, 2));
+            area.Snake.Push(new Point(3, 2));
+            area.Snake.Push(new Point(4, 2));
+            area.Snake.Push(new Point(5, 2));
+            area.Snake.Push(new Point(6, 2));
+            area.Snake.Push(new Point(6, 3));
             #endregion
             area.Apple = new Point(1, 1);
 
@@ -32,7 +32,7 @@ namespace SnakeConsole
             {
                 Clear();
                 //Move();
-                WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
+                WriteLine("Длинна змейки: " + area.Snake.Count);
                 Print(area.H, area.W);
                 Thread.Sleep(30);
                 Wall.BackText = (ConsoleColor)rand.Next(1, 16);
@@ -42,7 +42,7 @@ namespace SnakeConsole
         //todo: Режим эпилептика, пасхалка
         static void Print(int h, int w)
         {
-            //area.snake.SnakePos.Contains(new Point(s, i));
+            //area.Snake.Contains(new Point(s, i));
             for (int i = 0; i < h + 2; i++)
             {
                 if (i == 0 || i == h + 1)
@@ -59,7 +59,7 @@ namespace SnakeConsole
                     if (s == 0) { Wall.Print("  "); }
                     else if (s == w + 1) { Wall.PrintLine("  "); break; } //Нафиг брейк?
                     else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
-                    else if (area.snake.IsContainPoint(new Point(s-1, i-1))) Snake.Print("  ");
+                    else if (area.Snake.Contains(new Point(s - 1, i - 1))) Snake.Print("  ");
                     else Write("  ");
                 }
             }
