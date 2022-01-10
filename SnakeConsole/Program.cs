@@ -13,6 +13,7 @@ namespace SnakeConsole
         static Color Apple = new Color(ConsoleColor.Black, ConsoleColor.Red);
         static Color Snake = new Color(ConsoleColor.Black, ConsoleColor.Green);
         static Area area = new Area(20, 20);
+        static bool WasPressed = false;
         static void Main()
         {
             #region snake
@@ -25,16 +26,20 @@ namespace SnakeConsole
             area.snake.SnakePos.Add(new Point(6, 3));
             #endregion
             area.Apple = new Point(1, 1);
+
+            Random rand = new Random();
             while (true)
             {
-
-                Move();
                 Clear();
+                //Move();
                 WriteLine("Длинна змейки: " + area.snake.SnakePos.Count);
                 Print(area.H, area.W);
-                Thread.Sleep(700);
+                Thread.Sleep(30);
+                Wall.BackText = (ConsoleColor)rand.Next(1, 16);
             }
         }
+
+        //todo: Режим эпилептика, пасхалка
         static void Print(int h, int w)
         {
             //area.snake.SnakePos.Contains(new Point(s, i));
@@ -52,16 +57,26 @@ namespace SnakeConsole
                 for (int s = 0; s < w + 2; s++)
                 {
                     if (s == 0) { Wall.Print("  "); }
-                    else if (s == w + 1) { Wall.PrintLine("  "); break; }
+                    else if (s == w + 1) { Wall.PrintLine("  "); break; } //Нафиг брейк?
                     else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
                     else if (area.snake.IsContainPoint(new Point(s-1, i-1))) Snake.Print("  ");
                     else Write("  ");
-                } 
+                }
             }
 
         }
         static void Move()
         {
+            if (!Console.KeyAvailable) WasPressed = false;
+            if (Console.KeyAvailable && !WasPressed)
+            {
+                var a = ReadKey(false).Key;
+                if (a == ConsoleKey.UpArrow) Write("Up");
+                else if (a == ConsoleKey.DownArrow) Write("Down");
+                else if (a == ConsoleKey.LeftArrow) Write("Left");
+                else if (a == ConsoleKey.RightArrow) Write("Right");
+                WasPressed = true;
+            }
 
         }
 

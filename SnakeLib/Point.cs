@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SnakeLib
+namespace SnakeLib;
+public record Point
 {
-    public class Point
-    {
-        public int x, y;
+    public int x { get; set; }
+    public int y { get; set; }
 
-        public Point(int x, int y)
-        {
-            this.x = x; this.y = y;
-        }
-    } 
+    public Point(int x, int y)
+    {
+        this.x = x; this.y = y;
+    }
 }
+

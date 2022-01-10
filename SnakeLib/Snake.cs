@@ -18,8 +18,8 @@ namespace SnakeLib
         
         public bool IsContainPoint(Point point)
         {
-            foreach (Point p in SnakePos)
-                if (p.x == point.x && p.y == point.y) return true;
+            foreach (Point pos in SnakePos)
+                if (point == pos) return true;
 
             return false;
         } 
