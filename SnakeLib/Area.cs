@@ -4,7 +4,8 @@ public class Area
 {
     public int W, H;
     public Point Apple;
-    public Snake snake = new Snake();
+    //public Snake snake = new Snake();
+    public Stack<Point> Snake = new Stack<Point>();
     private Random rand = new Random();
     readonly Point AreaCenter;
 
@@ -24,6 +25,5 @@ public class Area
 
 
     }
-    
 }
 
