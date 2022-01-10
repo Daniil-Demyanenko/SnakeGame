@@ -12,14 +12,16 @@ public class Area
     {
         this.W = W; this.H = H;
         AreaCenter = new Point(W / 2, H / 2);
+        add_apple();   
     } 
 
-
-    public void add_apple()//TODO: Используй нормальное определение ячеек змеи 
+    //adding apple on the area 
+    public void add_apple()
     {        
        do Apple = new Point(rand.Next(W), rand.Next(H));
        while(!snake.IsContainPoint(Apple));
     }
     
+
 }
 
