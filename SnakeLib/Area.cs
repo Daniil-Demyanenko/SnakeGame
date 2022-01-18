@@ -13,6 +13,7 @@ public class Area
     public Area(int W, int H)
     {
         this.W = W; this.H = H;
+        SnaleIsLive = true;
         AreaCenter = new Point(W / 2, H / 2);
         add_apple();
     } 
@@ -21,7 +22,7 @@ public class Area
     public void add_apple()
     {        
        do Apple = new Point(rand.Next(W), rand.Next(H));
-       while(!Snake.Contains(Apple));
+       while(Snake.Contains(Apple));
     }
     
 }

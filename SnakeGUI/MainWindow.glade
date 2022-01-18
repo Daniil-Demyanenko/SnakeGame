@@ -50,9 +50,4 @@
       </object>
     </child>
   </object>
-  <object class="GtkDrawingArea" id="darea">
-    <property name="visible">True</property>
-    <property name="app-paintable">True</property>
-    <property name="can-focus">False</property>
-  </object>
 </interface>

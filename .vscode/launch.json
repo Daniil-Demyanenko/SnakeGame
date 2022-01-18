@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (console)",
+            "name": ".NET Core (Console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -13,6 +13,17 @@
             "args": [],
             "cwd": "${workspaceFolder}/SnakeConsole",
             "console": "externalTerminal",
+            "stopAtEntry": false
+        },
+        {
+            "name": ".NET Core (GUI)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/SnakeGUI/bin/Debug/net6.0/SnakeGUI.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/SnakeGUI",
+            "console": "integratedTerminal",
             "stopAtEntry": false
         },
         {
