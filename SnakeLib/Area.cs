@@ -10,6 +10,7 @@ public class Area
     public List<Point> Snake = new List<Point>();
     private Direction ActDirection;
     private Random rand = new Random();
+    public bool SnaleIsLive {get; private set;}
     readonly Point AreaCenter;
 
     /// <summary>
@@ -25,6 +26,9 @@ public class Area
         SnaleIsLive = true;
         AreaCenter = new Point(W / 2, H / 2);
         Add_apple();
+        
+        Snake.Add(AreaCenter);
+        Snake.Add(new Point(AreaCenter.x, AreaCenter.y));
     }
 
     /// <summary>
@@ -34,6 +38,11 @@ public class Area
     {        
        do Apple = new Point(rand.Next(W), rand.Next(H));
        while(Snake.Contains(Apple));
+    }
+
+    public void NextStep(Direction d) 
+    {
+        //TODO: Движение в направлении d
     }
 
 
