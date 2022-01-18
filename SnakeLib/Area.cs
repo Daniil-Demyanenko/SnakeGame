@@ -6,6 +6,7 @@ public class Area
     public Point Apple;
     //public Snake snake = new Snake();
     public Stack<Point> Snake = new Stack<Point>();
+    public bool SnaleIsLive {get; private set;}
     private Random rand = new Random();
     readonly Point AreaCenter;
 
