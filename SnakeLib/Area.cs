@@ -16,11 +16,12 @@ public class Area
         add_apple();
     } 
 
-
-    public void add_apple()//TODO: Используй нормальное определение ячеек змеи 
+    //adding apple on the area 
+    public void add_apple()
     {        
        do Apple = new Point(rand.Next(W), rand.Next(H));
        while(!Snake.Contains(Apple));
     }
+    
 }
 
