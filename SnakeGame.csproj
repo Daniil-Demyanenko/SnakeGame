@@ -1,5 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="SnakeConsole\SnakeConsole.csproj" />
+    <ProjectReference Include="SnakeGUI\SnakeGUI.csproj" />
+    <ProjectReference Include="SnakeLib\SnakeLib.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

@@ -22,6 +22,7 @@ public class Area
         ActDirection = Direction.Up;
 
         this.W = W; this.H = H;
+        SnaleIsLive = true;
         AreaCenter = new Point(W / 2, H / 2);
         Add_apple();
     }
@@ -32,7 +33,7 @@ public class Area
     public void Add_apple()
     {        
        do Apple = new Point(rand.Next(W), rand.Next(H));
-       while(!Snake.Contains(Apple));
+       while(Snake.Contains(Apple));
     }
 
 
