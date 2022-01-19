@@ -13,6 +13,7 @@ namespace SnakeGUI
         [UI] private Label snake_info = null;
         [UI] private Image img = null;
         private Area area;
+        private SnakeLib.Direction direction = SnakeLib.Direction.Up;
 
         //https://zetcode.com/gui/gtksharp/drawing/
 
@@ -23,7 +24,9 @@ namespace SnakeGUI
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-            area = new Area(35, 35);
+            area = new Area(AppSettings.AreaWidth, AppSettings.AreaHeight);
+            this.KeyPressEvent += KeyPressed;
+
 
             Draw();
         }
@@ -35,7 +38,8 @@ namespace SnakeGUI
 
         private async Task Draw()
         {
-            int K = (area.H > area.W) ? 800 / (area.H + 2) : 800 / (area.W + 2); // коэфициент масштабирования
+            int counter = 0; // счтётчик для обращения к змейке
+            int K = AppSettings.GetImgResizeK(); // коэфициент масштабирования
             // настройка Cairo
             var cs = new Cairo.ImageSurface(Format.Argb32, (area.W + 2) * K, (area.H + 2) * K);
             var cc = new Cairo.Context(cs);
@@ -45,11 +49,15 @@ namespace SnakeGUI
             cc.Translate(+1, +1);
             while (area.SnakeIsLive)
             {
-                await Task.Run(() => System.Threading.Thread.Sleep(200));
+                await Task.Run(() => System.Threading.Thread.Sleep(AppSettings.GamePeriod));
+
+                Color CWall = AppSettings.EpilepsyMode ?
+                            new Color(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble()) :
+                            new Color(1, 1, 0);
 
                 // Границы поля
                 cc.Rectangle(-1, -1, area.W + 2, area.H + 2);
-                cc.SetSourceRGB(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble());
+                cc.SetSourceColor(CWall);
                 cc.Fill();
 
                 // границы поля
@@ -71,11 +79,33 @@ namespace SnakeGUI
 
                 await Task.Run(() => System.Threading.Thread.Sleep(10));
                 img.FromSurface = cs;
+
+                counter++;
+                if (counter >= AppSettings.SnakeSpeed)
+                {
+                    area.NextStep(direction);
+                    counter = 0;
+                }
             }
 
             cc.GetTarget().Dispose();
             cc.Dispose();
             cs.Dispose();
+        }
+
+        [GLib.ConnectBefore]
+        void KeyPressed(object sender, KeyPressEventArgs e)
+        {
+            direction = e.Event.Key switch
+            {
+                (Gdk.Key.Down or Gdk.Key.downarrow or Gdk.Key.KP_Down) => SnakeLib.Direction.Down,
+                (Gdk.Key.Up or Gdk.Key.uparrow or Gdk.Key.KP_Up) => SnakeLib.Direction.Up,
+                (Gdk.Key.Left or Gdk.Key.leftarrow or Gdk.Key.KP_Left) => SnakeLib.Direction.Left,
+                (Gdk.Key.Right or Gdk.Key.rightarrow or Gdk.Key.KP_Right) => SnakeLib.Direction.Right,
+                _ => direction
+            };
+
+            Console.WriteLine(direction.ToString());
         }
     }
 }
