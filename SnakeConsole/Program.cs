@@ -16,16 +16,15 @@ namespace SnakeConsole
         static bool WasPressed = false;
         static void Main()
         {
-            #region snake
-            area.Snake = new List<Point>();
-            area.Snake.Add(new Point(2, 2));
-            area.Snake.Add(new Point(3, 2));
-            area.Snake.Add(new Point(4, 2));
-            area.Snake.Add(new Point(5, 2));
-            area.Snake.Add(new Point(6, 2));
-            area.Snake.Add(new Point(6, 3));
-            #endregion
-            area.Apple = new Point(1, 1);
+            // #region snake
+            // area.Snake = new List<Point>();
+            // area.Snake.Add(new Point(2, 2));
+            // area.Snake.Add(new Point(3, 2));
+            // area.Snake.Add(new Point(4, 2));
+            // area.Snake.Add(new Point(5, 2));
+            // area.Snake.Add(new Point(6, 2));
+            // area.Snake.Add(new Point(6, 3));
+            // #endregion
 
             Random rand = new Random();
             while (true)

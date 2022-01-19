@@ -26,6 +26,7 @@ namespace SnakeGUI
             area = new Area(500,500);
 
             Draw();
+            area.NextStep(SnakeLib.Direction.Up);
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
@@ -39,7 +40,7 @@ namespace SnakeGUI
             var cs = new Cairo.ImageSurface(Format.Argb32, 500, 500);
             var cc = new Cairo.Context(cs);
 
-            while (area.SnaleIsLive)
+            while (area.SnakeIsLive)
             {
                 await Task.Run(() => System.Threading.Thread.Sleep(200));
                 //обновляем фон
