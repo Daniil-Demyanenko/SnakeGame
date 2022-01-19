@@ -23,10 +23,9 @@ namespace SnakeGUI
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-            area = new Area(500,500);
+            area = new Area(35, 35);
 
             Draw();
-            area.NextStep(SnakeLib.Direction.Up);
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
@@ -36,27 +35,38 @@ namespace SnakeGUI
 
         private async Task Draw()
         {
+            int K = (area.H > area.W) ? 800 / (area.H + 2) : 800 / (area.W + 2); // коэфициент масштабирования
             // настройка Cairo
-            var cs = new Cairo.ImageSurface(Format.Argb32, 500, 500);
+            var cs = new Cairo.ImageSurface(Format.Argb32, (area.W + 2) * K, (area.H + 2) * K);
             var cc = new Cairo.Context(cs);
 
+
+            cc.Scale(K, K);
+            cc.Translate(+1, +1);
             while (area.SnakeIsLive)
             {
                 await Task.Run(() => System.Threading.Thread.Sleep(200));
-                //обновляем фон
-                cc.Rectangle(0, 0, 500, 500);
-                cc.SetSourceRGB(40/(double)255, 40/(double)255, 40/(double)255);
+
+                // Границы поля
+                cc.Rectangle(-1, -1, area.W + 2, area.H + 2);
+                cc.SetSourceRGB(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble());
                 cc.Fill();
 
                 // границы поля
-                cc.Rectangle(0, 0, 500, 500);
-                cc.SetSourceRGB(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble());
-                cc.LineWidth = 50;
-                cc.Stroke();
+                cc.Rectangle(0, 0, area.W, area.H);
+                cc.SetSourceRGB(0.1568, 0.1568, 0.1568);
+                cc.Fill();
+
 
                 // Яблоко
-                cc.Rectangle(50, 50, 25, 25);
+                cc.Rectangle(area.Apple.x, area.Apple.y, 1, 1);
                 cc.SetSourceRGB(1, 0, 0);
+                cc.Fill();
+
+                // Змей
+                foreach (var i in area.Snake)
+                    cc.Rectangle(i.x, i.y, 1, 1);
+                cc.SetSourceRGB(0, 1, 0);
                 cc.Fill();
 
                 await Task.Run(() => System.Threading.Thread.Sleep(10));
