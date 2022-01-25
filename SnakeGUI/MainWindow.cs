@@ -15,8 +15,6 @@ namespace SnakeGUI
         private Area area;
         private SnakeLib.Direction direction = SnakeLib.Direction.Up;
 
-        //https://zetcode.com/gui/gtksharp/drawing/
-
         public MainWindow() : this(new Builder("MainWindow.glade")) { }
 
         private MainWindow(Builder builder) : base(builder.GetRawOwnedObject("MainWindow"))
@@ -51,9 +49,12 @@ namespace SnakeGUI
             {
                 await Task.Run(() => System.Threading.Thread.Sleep(AppSettings.GamePeriod));
 
-                Color CWall = AppSettings.EpilepsyMode ?
-                            new Color(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble()) :
-                            new Color(1, 1, 0);
+                Color CWall = SetEpilepsyColor(1, 1, 0);
+                Color CBack = SetEpilepsyColor(0.1568, 0.1568, 0.1568);
+                Color CApple = SetEpilepsyColor(1, 0, 0);
+                Color CSnake = SetEpilepsyColor(0, 1, 0);
+
+
 
                 // Границы поля
                 cc.Rectangle(-1, -1, area.W + 2, area.H + 2);
@@ -62,19 +63,19 @@ namespace SnakeGUI
 
                 // границы поля
                 cc.Rectangle(0, 0, area.W, area.H);
-                cc.SetSourceRGB(0.1568, 0.1568, 0.1568);
+                cc.SetSourceColor(CBack);
                 cc.Fill();
 
 
                 // Яблоко
                 cc.Rectangle(area.Apple.x, area.Apple.y, 1, 1);
-                cc.SetSourceRGB(1, 0, 0);
+                cc.SetSourceColor(CApple);
                 cc.Fill();
 
                 // Змей
                 foreach (var i in area.Snake)
                     cc.Rectangle(i.x, i.y, 1, 1);
-                cc.SetSourceRGB(0, 1, 0);
+                cc.SetSourceColor(CSnake);
                 cc.Fill();
 
                 await Task.Run(() => System.Threading.Thread.Sleep(10));
@@ -92,6 +93,11 @@ namespace SnakeGUI
             cc.Dispose();
             cs.Dispose();
         }
+
+        private Color SetEpilepsyColor(double r, double g, double b) =>
+                            AppSettings.EpilepsyMode ?
+                            new Color(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble()) :
+                            new Color(r, g, b);
 
         [GLib.ConnectBefore]
         void KeyPressed(object sender, KeyPressEventArgs e)
