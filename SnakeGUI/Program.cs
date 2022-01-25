@@ -5,18 +5,20 @@ namespace SnakeGUI
 {
     class Program
     {
+        public static Application app = new Application("org.SnakeGUI.SnakeGUI", GLib.ApplicationFlags.None);
         [STAThread]
         public static void Main(string[] args)
         {
             Application.Init();
-
-            var app = new Application("org.SnakeGUI.SnakeGUI", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
 
-            var win = new MainWindow();
-            app.AddWindow(win);
-
-            win.Show();
+            //var win = new MainWindow();
+            var startWin = new SettingsWin();
+            
+            app.AddWindow(startWin);
+            //app.AddWindow(win);
+            
+            startWin.Show();
             Application.Run();
         }
     }

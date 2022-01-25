@@ -49,6 +49,7 @@ namespace SnakeGUI
             {
                 await Task.Run(() => System.Threading.Thread.Sleep(AppSettings.GamePeriod));
 
+                //инициализируем цвета
                 Color CWall = SetEpilepsyColor(1, 1, 0);
                 Color CBack = SetEpilepsyColor(0.1568, 0.1568, 0.1568);
                 Color CApple = SetEpilepsyColor(1, 0, 0);
@@ -94,6 +95,7 @@ namespace SnakeGUI
             cs.Dispose();
         }
 
+        // Если включен эпилептикМод, возвращает случайный чвет. Иначе -- указанный
         private Color SetEpilepsyColor(double r, double g, double b) =>
                             AppSettings.EpilepsyMode ?
                             new Color(Random.Shared.NextDouble(), Random.Shared.NextDouble(), Random.Shared.NextDouble()) :
