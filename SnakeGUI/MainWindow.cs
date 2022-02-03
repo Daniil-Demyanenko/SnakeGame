@@ -25,7 +25,6 @@ namespace SnakeGUI
             area = new Area(AppSettings.AreaWidth, AppSettings.AreaHeight);
             this.KeyPressEvent += KeyPressed;
 
-
             Draw();
         }
 
@@ -85,7 +84,10 @@ namespace SnakeGUI
                 counter++;
                 if (counter >= AppSettings.SnakeSpeed)
                 {
+                    // Двигаем змейку
                     area.NextStep(direction);
+                    // указываем длину змейки
+                    snake_info.Text = (area.Snake.Count > 2)? $"Длина змейки: {area.Snake.Count}": "Управление стрелочками";
                     counter = 0;
                 }
             }
