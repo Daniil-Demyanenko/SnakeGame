@@ -57,7 +57,7 @@ namespace SnakeConsole
                 {
                     if (s == 0) { Wall.Print("  "); }
                     else if (s == w + 1) { Wall.PrintLine("  "); break; } //Нафиг брейк?
-                    else if (s == area.Apple.x + 1 && i == area.Apple.y + 1) Apple.Print("  ");
+                    else if (s == area.Apple.X + 1 && i == area.Apple.Y + 1) Apple.Print("  ");
                     else if (area.Snake.Contains(new Point(s - 1, i - 1))) Snake.Print("  ");
                     else Write("  ");
                 }

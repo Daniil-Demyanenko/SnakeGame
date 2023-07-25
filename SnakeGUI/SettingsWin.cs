@@ -7,11 +7,12 @@ namespace SnakeGUI
 {
     class SettingsWin : Window
     {
-        [UI] private CheckButton EpilepsyCheck = null;
-        [UI] private Button StartBtn = null;
-        [UI] private Scale SHeight = null;
-        [UI] private Scale SWidth = null;
-        [UI] private Scale SSize = null;
+        [UI] private CheckButton _epilepsyCheck = null;
+        [UI] private Button _startBtn = null;
+        [UI] private Scale _height = null;
+        [UI] private Scale _width = null;
+        [UI] private Scale _size = null;
+        [UI] private Scale _speed = null;
 
 
         public SettingsWin() : this(new Builder("MainWindow.glade")) { }
@@ -21,7 +22,7 @@ namespace SnakeGUI
             builder.Autoconnect(this);
 
             DeleteEvent += Window_DeleteEvent;
-            StartBtn.Clicked += Start_Click;
+            _startBtn.Clicked += Start_Click;
         }
 
         private void Window_DeleteEvent(object sender, DeleteEventArgs a)
@@ -32,12 +33,13 @@ namespace SnakeGUI
         private void Start_Click(object sender, EventArgs e)
         {
             // Настройка приложения
-            AppSettings.EpilepsyMode = EpilepsyCheck.Active;
-            AppSettings.AreaWidth = (int)SWidth.Value;
-            AppSettings.AreaHeight = (int)SHeight.Value;
-            AppSettings.ImgSize = (int)SSize.Value;
+            AppSettings.EpilepsyMode = _epilepsyCheck.Active;
+            AppSettings.AreaWidth = (int)_width.Value;
+            AppSettings.AreaHeight = (int)_height.Value;
+            AppSettings.ImgSize = (int)_size.Value;
+            AppSettings.SnakeSpeed = (int)_speed.Value;
 
-            this.Hide();    //скрыли текущее окно
+            this.Hide();    // Cкрыли текущее окно
             var gameWin = new MainWindow();
             Program.app.AddWindow(gameWin); // Добавили новое окно в приложении
             Application.Windows[0].Show(); // Показываем окно с игрой
